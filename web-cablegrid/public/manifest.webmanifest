@@ -1,0 +1,12 @@
+{
+  "name": "CableGrid",
+  "short_name": "CableGrid",
+  "description": "Cable registry, crew reports and approvals for cabling projects.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#EEF1EC",
+  "theme_color": "#EEF1EC",
+  "icons": [
+    { "src": "/icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

@@ -1,0 +1,203 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CableGrid design system — light engineering blueprint. All colors HSL. */
+
+@layer base {
+  :root {
+    --background: 96 15% 93.5%;
+    --foreground: 210 65% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 65% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 65% 12%;
+
+    --primary: 16 100% 56%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 96 14% 96%;
+    --secondary-foreground: 210 65% 12%;
+
+    --muted: 96 14% 95%;
+    --muted-foreground: 207 14% 41%;
+
+    --accent: 16 100% 96%;
+    --accent-foreground: 16 90% 40%;
+
+    --destructive: 353 77% 56%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 98 10% 84%;
+    --input: 98 10% 82%;
+    --ring: 16 100% 56%;
+
+    --radius: 0.625rem;
+
+    --sidebar-background: 96 16% 96%;
+    --sidebar-foreground: 210 65% 12%;
+    --sidebar-primary: 16 100% 56%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 16 100% 95%;
+    --sidebar-accent-foreground: 16 90% 42%;
+    --sidebar-border: 98 10% 84%;
+    --sidebar-ring: 16 100% 56%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: "Onest", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-feature-settings: "ss01", "cv11";
+    /* Words never split across lines */
+    word-break: normal;
+    overflow-wrap: normal;
+    hyphens: none;
+  }
+
+  .font-mono,
+  code,
+  kbd {
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .blueprint {
+    background-color: hsl(var(--background));
+    background-image: radial-gradient(hsl(207 14% 41% / 0.16) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  .panel {
+    @apply rounded-[10px] border bg-card;
+  }
+
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .cable-line {
+    background: linear-gradient(90deg, #ff5a1f 0 33%, #2563eb 33% 66%, #f5c400 66% 100%);
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(98 10% 75%) transparent;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+.flow-line {
+  stroke-dasharray: 6 6;
+  animation: flow 1.2s linear infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise {
+  animation: rise 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .flow-line {
+    animation: none;
+  }
+}
+
+/* Work board (TV): calm entrances, no blinking */
+@keyframes tv-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes tv-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+  }
+  30% {
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.22);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+  }
+}
+.tv-in {
+  animation: tv-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.tv-glow {
+  animation: tv-glow 2.4s ease-out 1;
+}
+@keyframes tv-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.tv-progress {
+  transform-origin: left;
+  animation: tv-progress linear both;
+}
+@keyframes tv-ring {
+  0%, 70%, 100% { transform: rotate(0); }
+  74% { transform: rotate(-12deg); }
+  80% { transform: rotate(10deg); }
+  86% { transform: rotate(-6deg); }
+  92% { transform: rotate(3deg); }
+}
+.tv-ring {
+  animation: tv-ring 4s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tv-ring,
+  .tv-in,
+  .tv-glow,
+  .tv-progress {
+    animation: none;
+  }
+}
